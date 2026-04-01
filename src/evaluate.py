@@ -22,7 +22,7 @@ def evaluate_model(model, X_test, y_test, model_name="Model"):
     print("ROC-AUC  :", roc_auc_score(y_test, y_prob))
 
     print("\nClassification Report:")
-    print(classification_report(y_test, y_pred))
+    print(classification_report(y_test, y_pred, zero_division=0))
 
     print("Confusion Matrix:")
     print(confusion_matrix(y_test, y_pred))
