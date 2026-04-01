@@ -30,3 +30,19 @@ def main():
 
     # 4. Split data
     X_train, X_test, y_train, y_test = split_data(X_clean, y)
+
+    print("\nTrain shape:", X_train.shape)
+    print("Test shape :", X_test.shape)
+
+    # 5. Logistic Regression baseline
+    lr_model = build_logistic_regression_model(X_train)
+    lr_model.fit(X_train, y_train)
+    evaluate_model(lr_model, X_test, y_test, model_name="Logistic Regression")
+
+    # 6. random Forest baseline
+    rf_model = build_random_forest_model(X_train)
+    rf_model.fit(X_train, y_train)
+    evaluate_model(rf_model, X_test, y_test, model_name="Random Forest")
+
+if __name__ == "__main__":
+    main()

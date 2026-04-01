@@ -9,11 +9,16 @@ def build_preprocessor(X_train):
     # Builds preprocessing pipeline for numeric and categorical columns
 
     numeric_cols = X_train.select_dtypes(include=["int64", "float64"]).columns.tolist()
-    categorical_cols.  X_train.select_dtypes(include=["object", "category", "bool"]).columns.tolist()
+    categorical_cols = X_train.select_dtypes(include=["object", "category", "bool"]).columns.tolist()
 
     numeric_transformer = Pipeline(steps=[
         ("imputer", SimpleImputer(strategy="median")),
         ("Scalar", StandardScaler())
+    ])
+
+    categorical_transformer = Pipeline(steps=[
+        ("imputer", SimpleImputer(strategy="most_frequent")),
+        ("onehot", OneHotEncoder(handle_unknown="ignore"))
     ])
 
     preprocessor = ColumnTransformer(
@@ -36,6 +41,7 @@ def build_logistic_regression_model(X_train):
     ])
 
     return model
+
 def build_random_forest_model(X_train):
     # Creates a random forest pipeline
 
@@ -45,7 +51,7 @@ def build_random_forest_model(X_train):
         ("preprocessor", preprocessor),
         ("classifier", RandomForestClassifier(
             n_estimators=300,
-            min_sample_split=5,
+            min_samples_split=5,
             random_state=42,
             class_weight="balanced"
         ))
