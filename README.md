@@ -1,6 +1,7 @@
 # Heart Attack / MI Complications Prediction
 
 This Project uses the UCi Myocardial Infarction Complications dataset to train a first machine learning model.
+https://archive.ics.uci.edu/dataset/579/myocardial+infarction+complications
 
 ## Files
 
